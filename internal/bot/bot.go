@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/BetOnJeanette/EmbedBot/internal/bot/handlers"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -26,7 +27,9 @@ func New(token string) (bot *Bot, err error) {
 
 	slog.Info("Initialized discordgo session.")
 
-	dg.Identify.Intents = discordgo.IntentGuildMessages
+	dg.Identify.Intents = discordgo.IntentGuildMessages | discordgo.IntentsGuildMessages
+
+	dg.AddHandler(handlers.MessageHandler)
 
 	bot = &Bot{dg}
 
