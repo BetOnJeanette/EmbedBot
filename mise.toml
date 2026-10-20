@@ -1,0 +1,15 @@
+[tools]
+go = "latest"
+"go:github.com/mgechev/revive" = "latest"
+
+[tasks.dev]
+description = "Compile and run embed bot"
+run = "go run ./cmd/embed-bot"
+
+[tasks.build]
+description = "Compile embed bot"
+run = "go build -o out/ ./cmd/embed-bot"
+
+[tasks.lint]
+description = "Lint embed bot"
+run = "revive -config revive.toml -formatter stylish ./..."
