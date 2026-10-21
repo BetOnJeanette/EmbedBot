@@ -12,4 +12,3 @@ func (Reddit) Fix(s string) string {
 
 func (Reddit) GetHost() string {
 	return "reddit.com"
-}
