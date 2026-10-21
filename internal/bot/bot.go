@@ -29,7 +29,7 @@ func New(token string) (bot *Bot, err error) {
 
 	dg.Identify.Intents = discordgo.IntentGuildMessages | discordgo.IntentsGuildMessages
 
-	dg.AddHandler(handlers.MessageHandler)
+	dg.AddHandler(handlers.Init().Handler)
 
 	bot = &Bot{dg}
 

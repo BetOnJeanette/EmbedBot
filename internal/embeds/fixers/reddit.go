@@ -1,8 +1,15 @@
-package embedfixer
-import "strings"
+package fixers
 
-type reddit struct {}
+import "regexp"
 
-func (reddit) fix(s string) string {
-	return strings.Replace(s, "https://www.reddit.com/r", "https://www.vxreddit.com/r", 0);
+type Reddit struct{}
+
+var redditRe = regexp.MustCompile(`(?i)^(https?://)(?:[a-z0-9-]+\.)*reddit\.com([:/?#]|$)`)
+
+func (Reddit) Fix(s string) string {
+	return redditRe.ReplaceAllString(s, "${1}vxreddit.com${2}")
+}
+
+func (Reddit) GetHost() string {
+	return "reddit.com"
 }
