@@ -2,7 +2,10 @@
 // by all of the embeds that we replace for.
 package embeds
 
+import "net/url"
+
+// EmbedFixer interface for all fixers
 type EmbedFixer interface {
-	Fix(link string) string
+	Fix(link url.URL) string
 	GetHost() string
 }
