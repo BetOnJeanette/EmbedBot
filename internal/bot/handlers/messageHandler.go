@@ -65,6 +65,11 @@ func (messageHandler *MessageHandler) Handler(s *discordgo.Session, m *discordgo
 			continue
 		}
 
+		if !fixer.ShouldFix(*u) {
+			slog.Debug("Fixer determined not to replace link")
+			continue
+		}
+
 		sb.WriteString("-# ")
 		sb.WriteString(fixer.Fix(*u.Clone()))
 		sb.WriteRune('\n')
@@ -72,6 +77,7 @@ func (messageHandler *MessageHandler) Handler(s *discordgo.Session, m *discordgo
 	}
 
 	if sb.Len() == 0 {
+		slog.Debug("Fixer decided against replacing the link")
 		return
 	}
 
