@@ -12,6 +12,13 @@ type Reddit struct{}
 // Fix Reddits embeds
 func (Reddit) Fix(s url.URL) string {
 	s.Host = "www.vxreddit.com"
+	q := s.Query()
+	q.Del("utm_source")
+	q.Del("utm_name")
+	q.Del("utm_term")
+	q.Del("utm_content")
+	q.Del("utm_medium")
+	s.RawQuery = q.Encode()
 	return s.String()
 }
 
