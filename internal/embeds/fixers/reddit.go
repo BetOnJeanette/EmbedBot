@@ -22,7 +22,8 @@ func (Reddit) GetHost() string {
 
 // ShouldFix links based on Reddit
 func (Reddit) ShouldFix(link url.URL) bool {
+	minSlashes := len(strings.Split("/r/THE_PACK/comments/1xg8hwi", "/"))
 	domainSplit := strings.Split(link.Path, "/")
-	if (len(domainSplit) < 6) { return false }
+	if (len(domainSplit) < minSlashes) { return false }
 	return strings.ToLower(domainSplit[3]) == "comments"
 }
