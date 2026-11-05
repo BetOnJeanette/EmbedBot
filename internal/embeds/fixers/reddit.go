@@ -1,14 +1,17 @@
+// Package fixers provides all the fixers for the various embeds we cover
 package fixers
 
-import "regexp"
-
+import "net/url"
+// Reddit embed fixer
 type Reddit struct{}
 
-var redditRe = regexp.MustCompile(`(?i)^(https?://)(?:[a-z0-9-]+\.)*reddit\.com([:/?#]|$)`)
-
-func (Reddit) Fix(s string) string {
-	return redditRe.ReplaceAllString(s, "${1}vxreddit.com${2}")
+// Fix Reddits embeds
+func (Reddit) Fix(s url.URL) string {
+	s.Host = "www.vxreddit.com"
+	return s.String()
 }
 
+// GetHost for Reddit
 func (Reddit) GetHost() string {
 	return "reddit.com"
+}

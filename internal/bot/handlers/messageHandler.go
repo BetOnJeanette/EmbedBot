@@ -66,7 +66,7 @@ func (messageHandler *MessageHandler) Handler(s *discordgo.Session, m *discordgo
 		}
 
 		sb.WriteString("-# ")
-		sb.WriteString(fixer.Fix(link))
+		sb.WriteString(fixer.Fix(*u.Clone()))
 		sb.WriteRune('\n')
 
 	}
