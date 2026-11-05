@@ -8,4 +8,5 @@ import "net/url"
 type EmbedFixer interface {
 	Fix(link url.URL) string
 	GetHost() string
+	ShouldFix(link url.URL) bool
 }

@@ -1,7 +1,11 @@
 // Package fixers provides all the fixers for the various embeds we cover
 package fixers
 
-import "net/url"
+import (
+	"net/url"
+	"strings"
+)
+
 // Reddit embed fixer
 type Reddit struct{}
 
@@ -14,4 +18,12 @@ func (Reddit) Fix(s url.URL) string {
 // GetHost for Reddit
 func (Reddit) GetHost() string {
 	return "reddit.com"
+}
+
+// ShouldFix links based on Reddit
+func (Reddit) ShouldFix(link url.URL) bool {
+	minSlashes := len(strings.Split("/r/THE_PACK/comments/1xg8hwi", "/"))
+	domainSplit := strings.Split(link.Path, "/")
+	if (len(domainSplit) < minSlashes) { return false }
+	return strings.ToLower(domainSplit[3]) == "comments"
 }
