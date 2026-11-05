@@ -5,9 +5,12 @@ import (
 	"os"
 
 	"github.com/BetOnJeanette/EmbedBot/internal/bot"
+	"github.com/BetOnJeanette/EmbedBot/internal/logging"
 )
 
 func main() {
+	logging.Init()
+
 	token := os.Getenv("DISCORD_AUTH_TOKEN")
 
 	bot, err := bot.New(token)
