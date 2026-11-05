@@ -25,6 +25,7 @@ func Init() *MessageHandler {
 		embeds.New(
 			fixers.Reddit{},
 			fixers.Twitter{},
+			fixers.Facebook{},
 		)
 
 	return &MessageHandler{registry: registry}
